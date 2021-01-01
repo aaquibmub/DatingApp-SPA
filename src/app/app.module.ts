@@ -1,3 +1,5 @@
+import { FileUploadModule } from 'ng2-file-upload';
+import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
@@ -44,6 +46,7 @@ export function tokenGetter(): string {
     MemberCardComponent,
     MemberDetailComponent,
     MemberEditComponent,
+    PhotoEditorComponent,
     ListsComponent,
     MessagesComponent
   ],
@@ -56,6 +59,7 @@ export function tokenGetter(): string {
     TabsModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     NgxGalleryModule,
+    FileUploadModule,
     JwtModule.forRoot({
       config: {
         tokenGetter,

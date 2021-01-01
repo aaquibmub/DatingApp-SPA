@@ -15,6 +15,7 @@ import { error } from 'protractor';
 export class MemberEditComponent implements OnInit {
   @ViewChild('editForm') editForm: NgForm;
   user: User;
+  photoUrl: string;
 
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any): void {
@@ -35,6 +36,7 @@ export class MemberEditComponent implements OnInit {
         this.user = data['user'];
       }
     );
+    this.authServce.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
   }
 
   updateUser(): void {
@@ -50,6 +52,10 @@ export class MemberEditComponent implements OnInit {
           this.editForm.reset(this.user);
         }
       );
+  }
+
+  updateMainPhoto(photoUrl): void {
+    this.user.photoUrl = photoUrl;
   }
 
 }

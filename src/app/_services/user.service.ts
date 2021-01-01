@@ -1,3 +1,4 @@
+import { ValueComponent } from './../value/value.component';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
@@ -23,6 +24,14 @@ export class UserService {
 
   updateUser(id: number, user: User): Observable<any> {
     return this.http.put(this.baseUrl + id, user);
+  }
+
+  setMainPhoto(userId: number, id: number): Observable<any> {
+    return this.http.post(this.baseUrl + userId + '/photos/' + id + '/setmain', {});
+  }
+
+  deletePhoto(userId: number, id: number): Observable<any> {
+    return this.http.delete(this.baseUrl + userId + '/photos/' + id);
   }
 
 }
