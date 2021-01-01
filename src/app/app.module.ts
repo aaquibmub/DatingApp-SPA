@@ -7,7 +7,7 @@ import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { NgModule, Pipe, PipeTransform } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -16,6 +16,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgxGalleryModule } from 'ngx-gallery-9';
+import { TimeAgoPipe } from 'time-ago-pipe';
 
 import { appRoutes } from './routes';
 import { AppComponent } from './app.component';
@@ -36,6 +37,16 @@ export function tokenGetter(): string {
   return localStorage.getItem('token');
 }
 
+@Pipe({
+  name: 'timeAgo',
+  pure: false
+})
+export class TimeAgoExtendsPipe extends TimeAgoPipe implements PipeTransform {
+  transform(value: string): string {
+    return super.transform(value);
+  }
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +60,8 @@ export function tokenGetter(): string {
     MemberEditComponent,
     PhotoEditorComponent,
     ListsComponent,
-    MessagesComponent
+    MessagesComponent,
+    TimeAgoExtendsPipe,
   ],
   imports: [
     BrowserModule,
